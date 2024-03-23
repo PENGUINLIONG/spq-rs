@@ -302,7 +302,6 @@ dependencies = [
  "num-traits",
  "pretty_assertions",
  "spirq",
- "spq-core",
 ]
 
 [[package]]

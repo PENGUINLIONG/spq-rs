@@ -37,7 +37,7 @@ out = []
 
 out += [
     "use anyhow::{bail, Result};",
-    "use spq_core::spirv::Op;",
+    "use spirq::spirv::Op;",
     "",
     "fn unknown_decorate_parameter_index(decoration: u32, i: usize) -> Result<&'static str> {",
     '    let opname = Op::from_u32(decoration).map(|op| format!("{:?}", op)).unwrap_or("<unknown>".to_owned());',

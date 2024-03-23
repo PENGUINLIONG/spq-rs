@@ -1,6 +1,6 @@
 use super::Disassembler;
 use pretty_assertions::assert_eq;
-use spq_core::parse::SpirvBinary;
+use spirq::parse::SpirvBinary;
 
 #[test]
 fn test_disassembler() {

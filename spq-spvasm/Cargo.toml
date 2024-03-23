@@ -20,7 +20,6 @@ maintenance = { status = "actively-developed" }
 [dependencies]
 anyhow = "1.0"
 num-traits = "0.2"
-spq-core = { version = "1.0.4", path = "../spq-core" }
 spirq = "1.1"
 half = { version =  "2.3", features = ["num-traits"] }
 

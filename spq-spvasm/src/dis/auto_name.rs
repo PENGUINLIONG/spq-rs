@@ -2,7 +2,7 @@ use anyhow::Result;
 use std::collections::HashMap;
 
 use spirq::reflect::ReflectIntermediate;
-use spq_core::{
+use spirq::{
     constant::ConstantValue,
     ty::{ArrayType, MatrixType, PointerType, ScalarType, StructType, Type, VectorType},
 };

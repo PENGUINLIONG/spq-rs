@@ -5,7 +5,7 @@ use crate::generated;
 use anyhow::{anyhow, bail, Result};
 use half::f16;
 use num_traits::FromPrimitive;
-use spq_core::{
+use spirq::{
     parse::{bin::SpirvHeader, InstructionBuilder, SpirvBinary},
     spirv::Op,
     ty::ScalarType,

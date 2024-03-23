@@ -1,6 +1,6 @@
 use pretty_assertions::assert_eq;
 use spirq::spirv;
-use spq_core::parse::bin::SpirvHeader;
+use spirq::parse::bin::SpirvHeader;
 
 use crate::asm::Assembler;
 use crate::dis::Disassembler;

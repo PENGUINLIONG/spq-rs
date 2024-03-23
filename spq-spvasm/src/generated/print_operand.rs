@@ -1,6 +1,6 @@
 use super::enum_to_str::enum_to_str;
 use anyhow::{bail, Result};
-use spq_core::parse::Operands;
+use spirq::parse::Operands;
 use std::collections::HashMap;
 
 fn print_id(operands: &mut Operands, id_names: &HashMap<u32, String>) -> Result<String> {

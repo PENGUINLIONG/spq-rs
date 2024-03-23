@@ -54,7 +54,7 @@ out = []
 out += [
     "use std::collections::HashMap;",
     "use anyhow::{bail, Result};",
-    "use spq_core::parse::Operands;",
+    "use spirq::parse::Operands;",
     "use super::enum_to_str::enum_to_str;",
     "",
     "fn print_id(operands: &mut Operands, id_names: &HashMap<u32, String>) -> Result<String> {",
