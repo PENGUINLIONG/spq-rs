@@ -45,6 +45,6 @@ jobs:
     - name: Assemble Disassemble Roundtrip
       id: cargo_build_and_test
       run: |
-        cargo run -p spirq-as assets/gallery.frag.spvasm -o assets/gallery.frag.spv
-        cargo run -p spirq-dis assets/gallery.frag.spv -o assets/gallery.frag.spvasm --no-indent
+        cargo run -p spq-as assets/gallery.frag.spvasm -o assets/gallery.frag.spv
+        cargo run -p spq-dis assets/gallery.frag.spv -o assets/gallery.frag.spvasm --no-indent
         echo git diff --exit-code --binary
