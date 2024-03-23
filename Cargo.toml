@@ -1,9 +1,7 @@
 [workspace]
 members = [
-    "spirq",
-    "spirq-core",
-    "spirq-spvasm",
-    "spirq-dis",
-    "spirq-as",
-    "shader-reflect",
+    "spq-core",
+    "spq-spvasm",
+    "spq-dis",
+    "spq-as",
 ]
