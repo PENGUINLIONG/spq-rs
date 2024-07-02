@@ -599,6 +599,32 @@ impl Evaluator {
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 }
             }
+            Op::IEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::S32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::S32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a == b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::INotEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::S32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::S32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a != b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
             _ => return Err(evaluation_failed(op, result_ty, operands)),
         };
         Ok(value)
