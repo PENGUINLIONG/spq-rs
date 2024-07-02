@@ -21,7 +21,7 @@ maintenance = { status = "actively-developed" }
 fnv = "1.0.7"
 spirv = "0.3"
 anyhow = "1.0"
-ordered-float = "3.4"
+ordered-float = "4.2"
 num-traits = "0.2"
 half = { version = "2.3", features = ["num-traits"] }
 bytemuck = "1.14"
