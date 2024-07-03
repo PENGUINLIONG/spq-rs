@@ -198,6 +198,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "ordered-float"
+version = "4.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "19ff2cf528c6c03d9ed653d6c4ce1dc0582dc4af309790ad92f07c1cd551b0be"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
 name = "pretty_assertions"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -234,7 +243,7 @@ dependencies = [
  "fnv",
  "num-derive",
  "num-traits",
- "ordered-float",
+ "ordered-float 3.9.2",
  "spirq-core",
 ]
 
@@ -249,7 +258,7 @@ dependencies = [
  "fnv",
  "half",
  "num-traits",
- "ordered-float",
+ "ordered-float 3.9.2",
  "spirv",
 ]
 
@@ -280,7 +289,7 @@ dependencies = [
  "fnv",
  "half",
  "num-traits",
- "ordered-float",
+ "ordered-float 4.2.1",
  "spirv",
 ]
 
