@@ -81,62 +81,62 @@ impl ConstantValue {
             match scalar_ty {
                 ScalarType::Boolean => Ok(ConstantValue::Bool(x.iter().any(|x| x != &0))),
                 ScalarType::Integer {
-                    bits: 8,
+                    bits: i8::BITS,
                     is_signed: true,
-                } if x.len() == 4 => {
+                } if matches!(x.len(), 1 | 4) => {
                     let x = i8::from_le_bytes([x[0]]);
                     Ok(ConstantValue::S8(x))
                 }
                 ScalarType::Integer {
-                    bits: 8,
+                    bits: u8::BITS,
                     is_signed: false,
-                } if x.len() == 4 => {
+                } if matches!(x.len(), 1 | 4) => {
                     let x = u8::from_le_bytes([x[0]]);
                     Ok(ConstantValue::U8(x))
                 }
                 ScalarType::Integer {
-                    bits: 16,
+                    bits: i16::BITS,
                     is_signed: true,
-                } if x.len() == 4 => {
+                } if matches!(x.len(), 2 | 4) => {
                     let x = i16::from_le_bytes([x[0], x[1]]);
                     Ok(ConstantValue::S16(x))
                 }
                 ScalarType::Integer {
-                    bits: 16,
+                    bits: u16::BITS,
                     is_signed: false,
-                } if x.len() == 4 => {
+                } if matches!(x.len(), 2 | 4) => {
                     let x = u16::from_le_bytes([x[0], x[1]]);
                     Ok(ConstantValue::U16(x))
                 }
                 ScalarType::Integer {
-                    bits: 32,
+                    bits: i32::BITS,
                     is_signed: true,
                 } if x.len() == 4 => {
                     let x = i32::from_le_bytes([x[0], x[1], x[2], x[3]]);
                     Ok(ConstantValue::S32(x))
                 }
                 ScalarType::Integer {
-                    bits: 32,
+                    bits: u32::BITS,
                     is_signed: false,
                 } if x.len() == 4 => {
                     let x = u32::from_le_bytes([x[0], x[1], x[2], x[3]]);
                     Ok(ConstantValue::U32(x))
                 }
                 ScalarType::Integer {
-                    bits: 64,
+                    bits: i64::BITS,
                     is_signed: true,
                 } if x.len() == 8 => {
                     let x = i64::from_le_bytes([x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]]);
                     Ok(ConstantValue::S64(x))
                 }
                 ScalarType::Integer {
-                    bits: 64,
+                    bits: u64::BITS,
                     is_signed: false,
                 } if x.len() == 8 => {
                     let x = u64::from_le_bytes([x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]]);
                     Ok(ConstantValue::U64(x))
                 }
-                ScalarType::Float { bits: 16 } if x.len() == 4 => {
+                ScalarType::Float { bits: 16 } if matches!(x.len(), 2 | 4) => {
                     let x = f16::from_le_bytes([x[0], x[1]]);
                     Ok(ConstantValue::F16(OrderedFloat(x)))
                 }

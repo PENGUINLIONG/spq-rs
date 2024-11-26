@@ -126,27 +126,57 @@ impl Evaluator {
             }
             Op::SConvert => {
                 let x = match operands {
-                    [ConstantValue::S32(x)] => *x,
+                    [ConstantValue::S8(x)] => *x as _,
+                    [ConstantValue::S16(x)] => *x as _,
+                    [ConstantValue::S32(x)] => *x as _,
+                    [ConstantValue::S64(x)] => *x,
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 };
                 match result_ty {
                     Type::Scalar(ScalarType::Integer {
+                        bits: 8,
+                        is_signed: true,
+                    }) => ConstantValue::S8(x as _),
+                    Type::Scalar(ScalarType::Integer {
+                        bits: 16,
+                        is_signed: true,
+                    }) => ConstantValue::S16(x as _),
+                    Type::Scalar(ScalarType::Integer {
                         bits: 32,
                         is_signed: true,
-                    }) => ConstantValue::S32(x),
+                    }) => ConstantValue::S32(x as _),
+                    Type::Scalar(ScalarType::Integer {
+                        bits: 64,
+                        is_signed: true,
+                    }) => ConstantValue::S64(x),
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 }
             }
             Op::UConvert => {
                 let x = match operands {
-                    [ConstantValue::U32(x)] => *x,
+                    [ConstantValue::U8(x)] => *x as _,
+                    [ConstantValue::U16(x)] => *x as _,
+                    [ConstantValue::U32(x)] => *x as _,
+                    [ConstantValue::U64(x)] => *x,
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 };
                 match result_ty {
                     Type::Scalar(ScalarType::Integer {
+                        bits: 8,
+                        is_signed: false,
+                    }) => ConstantValue::U8(x as _),
+                    Type::Scalar(ScalarType::Integer {
+                        bits: 16,
+                        is_signed: false,
+                    }) => ConstantValue::U16(x as _),
+                    Type::Scalar(ScalarType::Integer {
                         bits: 32,
                         is_signed: false,
-                    }) => ConstantValue::U32(x),
+                    }) => ConstantValue::U32(x as _),
+                    Type::Scalar(ScalarType::Integer {
+                        bits: 64,
+                        is_signed: false,
+                    }) => ConstantValue::U64(x),
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 }
             }
