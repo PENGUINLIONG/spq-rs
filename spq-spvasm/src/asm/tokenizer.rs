@@ -15,6 +15,7 @@ pub enum Lit {
 
 #[derive(Debug)]
 pub enum Token {
+    #[allow(dead_code)]
     Comment(String),
     Literal(Lit),
     Ident(String),
