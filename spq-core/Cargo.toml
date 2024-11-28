@@ -1,6 +1,6 @@
 [package]
 name = "spq-core"
-version = "1.0.5"
+version = "1.0.6"
 authors = ["PENGUINLIONG <admin@penguinliong.moe>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
