@@ -655,6 +655,165 @@ impl Evaluator {
                     _ => return Err(evaluation_failed(op, result_ty, operands)),
                 }
             }
+            Op::LogicalOr => {
+                let &[ConstantValue::Bool(a), ConstantValue::Bool(b)] = operands else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                };
+
+                if let Type::Scalar(ScalarType::Boolean) = result_ty {
+                    ConstantValue::Bool(a || b)
+                } else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                }
+            }
+            Op::LogicalAnd => {
+                let &[ConstantValue::Bool(a), ConstantValue::Bool(b)] = operands else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                };
+
+                if let Type::Scalar(ScalarType::Boolean) = result_ty {
+                    ConstantValue::Bool(a && b)
+                } else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                }
+            }
+            Op::LogicalNot => {
+                let &[ConstantValue::Bool(a)] = operands else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                };
+
+                if let Type::Scalar(ScalarType::Boolean) = result_ty {
+                    ConstantValue::Bool(!a)
+                } else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                }
+            }
+            Op::LogicalEqual => {
+                let &[ConstantValue::Bool(a), ConstantValue::Bool(b)] = operands else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                };
+
+                if let Type::Scalar(ScalarType::Boolean) = result_ty {
+                    ConstantValue::Bool(a == b)
+                } else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                }
+            }
+            Op::LogicalNotEqual => {
+                let &[ConstantValue::Bool(a), ConstantValue::Bool(b)] = operands else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                };
+
+                if let Type::Scalar(ScalarType::Boolean) = result_ty {
+                    ConstantValue::Bool(a != b)
+                } else {
+                    return Err(evaluation_failed(op, result_ty, operands));
+                }
+            }
+            Op::ULessThan => {
+                let (a, b) = match operands {
+                    [ConstantValue::U8(x), ConstantValue::U8(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U16(x), ConstantValue::U16(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U64(x), ConstantValue::U64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a < b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::SLessThan => {
+                let (a, b) = match operands {
+                    [ConstantValue::S8(x), ConstantValue::S8(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S16(x), ConstantValue::S16(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S64(x), ConstantValue::S64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a < b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::UGreaterThan => {
+                let (a, b) = match operands {
+                    [ConstantValue::U8(x), ConstantValue::U8(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U16(x), ConstantValue::U16(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U64(x), ConstantValue::U64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a > b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::SGreaterThan => {
+                let (a, b) = match operands {
+                    [ConstantValue::S8(x), ConstantValue::S8(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S16(x), ConstantValue::S16(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S64(x), ConstantValue::S64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a > b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::ULessThanEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::U8(x), ConstantValue::U8(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U16(x), ConstantValue::U16(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U64(x), ConstantValue::U64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a <= b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::SLessThanEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::S8(x), ConstantValue::S8(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S16(x), ConstantValue::S16(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S64(x), ConstantValue::S64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a <= b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::UGreaterThanEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::U8(x), ConstantValue::U8(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U16(x), ConstantValue::U16(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U32(x), ConstantValue::U32(y)] => (*x as u64, *y as u64),
+                    [ConstantValue::U64(x), ConstantValue::U64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a >= b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
+            Op::SGreaterThanEqual => {
+                let (a, b) = match operands {
+                    [ConstantValue::S8(x), ConstantValue::S8(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S16(x), ConstantValue::S16(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S32(x), ConstantValue::S32(y)] => (*x as i64, *y as i64),
+                    [ConstantValue::S64(x), ConstantValue::S64(y)] => (*x, *y),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                };
+                match result_ty {
+                    Type::Scalar(ScalarType::Boolean) => ConstantValue::Bool(a >= b),
+                    _ => return Err(evaluation_failed(op, result_ty, operands)),
+                }
+            }
             _ => return Err(evaluation_failed(op, result_ty, operands)),
         };
         Ok(value)
